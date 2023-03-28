@@ -12,5 +12,15 @@ namespace FlowPanelApp.Controllers
         {
             return View();
         }
+
+        public IActionResult TryAuthUser(string username, string password)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult CreateNewUser()
+        {
+            return View();
+        }
     }
 }

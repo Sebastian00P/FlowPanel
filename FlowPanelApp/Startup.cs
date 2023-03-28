@@ -27,7 +27,7 @@ namespace FlowPanelApp
         {
             services.AddControllersWithViews();
             services.AddDbContext<FlowContext>(options =>
-            options.UseSqlServer(Configuration["ConnectionString:FlowPanelConnection"]));
+            options.UseSqlServer(Configuration["ConnectionStrings:FlowPanelConnection"]));
             services.AddMvc();        
         }
 
@@ -55,7 +55,7 @@ namespace FlowPanelApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
