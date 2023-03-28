@@ -1,3 +1,4 @@
+using FlowPanelApp.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,8 @@ namespace PanelApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PanelApi", Version = "v1" });
             });
+            services.AddDbContext<FlowContext>(options =>
+           options.UseSqlServer(Configuration["ConnectionString:FlowPanelConnection"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

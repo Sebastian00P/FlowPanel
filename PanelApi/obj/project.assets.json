@@ -1593,6 +1593,23 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "FlowPanelApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FlowPanelApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FlowPanelApp.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -5968,10 +5985,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "FlowPanelApp/1.0.0": {
+      "type": "project",
+      "path": "../FlowPanelApp/FlowPanelApp.csproj",
+      "msbuildProject": "../FlowPanelApp/FlowPanelApp.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "FlowPanelApp >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.0",
@@ -6010,7 +6033,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Admin\\Desktop\\inzynierka\\FlowPanel\\FlowPanelApp\\FlowPanelApp.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\inzynierka\\FlowPanel\\FlowPanelApp\\FlowPanelApp.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
