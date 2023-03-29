@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace FlowPanelApp.Models
 {
-    public class User
+    public class LoginModel
     {
-        [Key]
-        public long UserId { get; set; }
+        [Required]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string Email { get; set; }
-        public string Role { get; set; }
-        public bool IsActive { get; set; }
-
+        public bool RememberLogin { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

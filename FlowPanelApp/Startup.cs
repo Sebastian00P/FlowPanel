@@ -1,4 +1,5 @@
 using FlowPanelApp.Context;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,13 @@ namespace FlowPanelApp
             services.AddControllersWithViews();
             services.AddDbContext<FlowContext>(options =>
             options.UseSqlServer(Configuration["ConnectionStrings:FlowPanelConnection"]));
-            services.AddMvc();        
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                option.LoginPath = "/Login/Index";
+                option.Cookie.Name = "DotNetCookie";
+            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +57,16 @@ namespace FlowPanelApp
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCookiePolicy();
+           
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
+
         }
     }
 }

@@ -46,3 +46,9 @@ FlowPanelApp/obj/Debug/net5.0/Razor/Views/_ViewImports.cshtml.g.cs
 FlowPanelApp/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
 
 FlowPanelApp/obj/Debug/net5.0/FlowPanelApp.RazorTargetAssemblyInfo.cs
+
+.vs/FlowPanel/DesignTimeBuild/.dtbcache.v2
+
+PanelApi/PanelApi.csproj
+
+*.csproj
