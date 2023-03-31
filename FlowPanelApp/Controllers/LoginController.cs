@@ -39,17 +39,22 @@ namespace FlowPanelApp.Controllers
 
         }
 
-        public IActionResult Login(string ReturnUrl = "/Home/Index")
+        public IActionResult Login(string returnUrl = "")
         {
+            if (string.IsNullOrWhiteSpace(returnUrl))
+            {
+                returnUrl = GetAppHomeUrl();
+            }
             LoginModel loginModel = new LoginModel();
-            loginModel.ReturnUrl = ReturnUrl;
+            loginModel.ReturnUrl = returnUrl;
             return View(loginModel);
         }
-
+       
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel, string returnUrl = "")
         {
+            returnUrl = NormalizeReturnUrl(returnUrl);
             var user = users.Where(x => x.UserName == loginModel.UserName && x.Password == loginModel.Password).FirstOrDefault();
             if(user != null)
             {
@@ -69,21 +74,14 @@ namespace FlowPanelApp.Controllers
                     IsPersistent = loginModel.RememberLogin
                 });
                 HttpContext.User = new ClaimsPrincipal(identity);
-
-                return RedirectToAction("AuthorizedView");
+                return Redirect(returnUrl);            
             }
             else
             {
                 ViewBag.Message = "Invalid Credential";
                 return View(loginModel);
             }
-        }
-
-        public async Task<IActionResult> AuthorizedView()
-        {
-
-            return RedirectToAction("Index", "Home");
-        }
+        }    
 
         public async Task<IActionResult> Logout()
         {
@@ -96,5 +94,29 @@ namespace FlowPanelApp.Controllers
         {
             return View();
         }
+        private string NormalizeReturnUrl(string returnUrl, Func<string> defaultValueBuilder = null)
+        {
+            if (defaultValueBuilder == null)
+            {
+                defaultValueBuilder = GetAppHomeUrl;
+            }
+
+            if (String.IsNullOrEmpty(returnUrl))
+            {
+                return defaultValueBuilder();
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return returnUrl;
+            }
+
+            return defaultValueBuilder();
+        }
+        public string GetAppHomeUrl()
+        {
+            return Url.Action("Index", "Home");
+        }
+
     }
 }

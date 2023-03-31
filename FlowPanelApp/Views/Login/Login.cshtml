@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form asp-action="Login">
+    <form asp-action="Login" method="post">
        @Html.HiddenFor(x => x.ReturnUrl)
 
         @if (!string.IsNullOrEmpty(ViewBag.Message))
@@ -25,7 +25,7 @@
                 <input type="text" class="form-control" name="username" placeholder="Username" />
             </div>
             <div>
-                <input type="text" class="form-control" name="password" placeholder="Password" />
+                <input type="password" class="form-control" name="password" placeholder="Password" />
             </div>
             <div>
                 <button class="login-btn">Log in</button>
