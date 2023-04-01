@@ -1,4 +1,6 @@
 using FlowPanelApp.Context;
+using FlowPanelApp.Services.AppService;
+using FlowPanelApp.Services.UserService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +37,9 @@ namespace FlowPanelApp
                 option.LoginPath = "/Login/Index";
                 option.Cookie.Name = "DotNetCookie";
             });
+            services.AddRazorPages();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAppService, AppService>();
             
         }
 

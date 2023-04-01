@@ -1,4 +1,5 @@
 ﻿using FlowPanelApp.Models;
+using FlowPanelApp.Services.UserService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -13,30 +14,12 @@ namespace FlowPanelApp.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IUserService _userService;
         public List<User> users = null;
 
-        public LoginController()
+        public LoginController(IUserService userService)
         {
-            users = new List<User>();
-            users.Add(new User()
-            {
-                UserId = 1,
-                UserName = "admin",
-                Password = "123qwe",
-                Role = "Admin",
-                Email = "pociask@onet.com.pl",
-                IsActive = true
-            });
-            users.Add(new User()
-            {
-                UserId = 2,
-                UserName = "user",
-                Password = "qwerty",
-                Role = "User",
-                Email = "test@onet.com.pl",
-                IsActive = true
-            });
-
+            _userService = userService;
         }
 
         public async Task<IActionResult> Login(string returnUrl = "")
@@ -55,8 +38,8 @@ namespace FlowPanelApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel, string returnUrl = "")
         {
-            returnUrl = NormalizeReturnUrl(returnUrl);
-            var user = users.Where(x => x.UserName == loginModel.UserName && x.Password == loginModel.Password).FirstOrDefault();
+            returnUrl = NormalizeReturnUrl(returnUrl);        
+            var user = await _userService.GetUserByUserNameAndPassword(loginModel.UserName, loginModel.Password);
             if(user != null)
             {
                 var claims = new List<Claim>() 
@@ -84,9 +67,19 @@ namespace FlowPanelApp.Controllers
             }
         }    
 
-        public IActionResult CreateUser(User user)
+        public async Task<IActionResult> CreateUser(User user)
         {
-            return RedirectToAction("Login", "Login");
+            if (user.Password.Length < 8)
+            {
+                ViewBag.Message = "Password too short";
+                return RedirectToAction("Register", "Login");
+            }
+            else
+            {
+                ViewBag.Message = "Account created contact with admin to active your account!";
+                await _userService.AddUser(user);
+                return RedirectToAction("Login", "Login");
+            }       
         }
 
         public async Task<IActionResult> Logout()

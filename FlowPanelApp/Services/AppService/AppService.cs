@@ -9,7 +9,7 @@ namespace FlowPanelApp.Services.AppService
 {
     public class AppService : IAppService
     {
-        public static string GetMd5Hash(string password)
+        public string GetMd5Hash(string password)
         {
             MD5 md5Hash = MD5.Create();
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(password));

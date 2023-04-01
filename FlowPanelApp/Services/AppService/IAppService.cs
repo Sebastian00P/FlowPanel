@@ -7,5 +7,6 @@ namespace FlowPanelApp.Services.AppService
 {
     public interface IAppService
     {
+        string GetMd5Hash(string password);
     }
 }
