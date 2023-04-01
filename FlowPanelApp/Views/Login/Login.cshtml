@@ -8,8 +8,7 @@
 </head>
 
 <body>
-    <form asp-action="Login" method="post">
-       @Html.HiddenFor(x => x.ReturnUrl)
+    
 
         @if (!string.IsNullOrEmpty(ViewBag.Message))
         {
@@ -17,7 +16,9 @@
                 @ViewBag.Message
             </span>
         }
-        <div class="login-modal">
+    <div class="login-modal">
+        <form asp-action="Login" method="post">
+            @Html.HiddenFor(x => x.ReturnUrl)
             <div class="title">
                 <label>Login</label>
             </div>
@@ -30,11 +31,15 @@
             <div>
                 <button class="login-btn">Log in</button>
             </div>
+        </form>
+        <form asp-action="Register" method="post">
             <div>
                 <button class="register-btn">Register</button>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+    
+    
 </body>
 
 
@@ -92,12 +97,20 @@
     }
 
     .register-btn {
-        background: red;
-        width: 150px;
+        /*width: 150px;
         border-radius: 3px;
         padding: 5px 10px 10px 5px;
         background-color: rgba(255,255,255,0.27);
         color: #eaf0fb;
         text-align: center;
+        cursor: pointer;*/
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>

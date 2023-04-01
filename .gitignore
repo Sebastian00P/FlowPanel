@@ -54,3 +54,7 @@ PanelApi/PanelApi.csproj
 *.csproj
 
 FlowPanelApp/obj/Debug/net5.0/Razor/Views/Login/Login.cshtml.g.cs
+
+FlowPanelApp/obj/Debug/net5.0/Razor/Views/Login/Register.cshtml.g.cs
+
+FlowPanelApp/obj/Debug/net5.0/Razor/Views/Login/LoginLayout.cshtml.g.cs

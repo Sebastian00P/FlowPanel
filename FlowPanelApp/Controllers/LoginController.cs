@@ -1,6 +1,7 @@
 ﻿using FlowPanelApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace FlowPanelApp.Controllers
 {
     public class LoginController : Controller
     {
-
         public List<User> users = null;
 
         public LoginController()
@@ -39,8 +39,9 @@ namespace FlowPanelApp.Controllers
 
         }
 
-        public IActionResult Login(string returnUrl = "")
+        public async Task<IActionResult> Login(string returnUrl = "")
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 returnUrl = GetAppHomeUrl();
@@ -83,14 +84,19 @@ namespace FlowPanelApp.Controllers
             }
         }    
 
+        public IActionResult CreateUser(User user)
+        {
+            return RedirectToAction("Login", "Login");
+        }
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return LocalRedirect("/");
         }
         
-
-        public IActionResult CreateNewUser()
+        [AllowAnonymous]
+        public IActionResult Register()
         {
             return View();
         }
