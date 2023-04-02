@@ -68,18 +68,10 @@ namespace FlowPanelApp.Controllers
         }    
 
         public async Task<IActionResult> CreateUser(User user)
-        {
-            if (user.Password.Length < 8)
-            {
-                ViewBag.Message = "Password too short";
-                return RedirectToAction("Register", "Login");
-            }
-            else
-            {
-                ViewBag.Message = "Account created contact with admin to active your account!";
-                await _userService.AddUser(user);
-                return RedirectToAction("Login", "Login");
-            }       
+        {                      
+            await _userService.AddUser(user);
+            ViewBag.Message = "Account created contact with admin to active your account!";
+            return RedirectToAction("Login", "Login");              
         }
 
         public async Task<IActionResult> Logout()
