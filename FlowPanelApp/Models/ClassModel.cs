@@ -13,5 +13,8 @@ namespace FlowPanelApp.Models
         [Key]
         public long ClassId { get; set; }
         public string ClassName { get; set; }
+        public virtual ICollection<Student> Students{ get; set; }
+        public virtual School school { get; set; }
+        public long SchoolId { get; set; }
     }
 }
