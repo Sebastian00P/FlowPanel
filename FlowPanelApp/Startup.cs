@@ -1,5 +1,6 @@
 using FlowPanelApp.Context;
 using FlowPanelApp.Services.AppService;
+using FlowPanelApp.Services.SchoolService;
 using FlowPanelApp.Services.UserService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace FlowPanelApp
             services.AddRazorPages();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAppService, AppService>();
+            services.AddScoped<ISchoolService, SchoolService>();
             
         }
 

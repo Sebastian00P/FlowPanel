@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FlowPanelApp.Models.School>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <span class="text-danger">
+        @ViewBag.Message
+    </span>
+}
+
+<h1>Schools</h1>
+
+<p>
+    <a asp-action="CreateSchool">
+        <div class="float-right">
+            <input type="button" class="btn btn-primary" value="Create school"/>
+        </div>
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logo)
+            </td>
+            <td>
+                     @Html.ActionLink("Edit", "EditSchool", new { SchoolId=item.SchoolId }) |
+               @* <a asp-action="EditSchool" asp-route-id="@item.SchoolId">Edit</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.SchoolId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

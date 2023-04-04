@@ -31,8 +31,8 @@ namespace FlowPanelApp.Services.UserService
         }
 
         public async Task<User> GetUserByUserNameAndPassword(string userName, string password)
-        {
-            var passwordHash = _appService.GetMd5Hash(password);
+        {         
+            var passwordHash = _appService.GetMd5Hash(password);          
             return await _flowContext.Users.Where(x => x.UserName == userName && x.Password == passwordHash).FirstOrDefaultAsync();
         }
        
