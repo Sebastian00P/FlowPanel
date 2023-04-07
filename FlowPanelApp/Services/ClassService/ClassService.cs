@@ -19,5 +19,11 @@ namespace FlowPanelApp.Services.ClassService
         {
             return await _flowContext.ClassModels.Where(x => x.SchoolId == schoolId).ToListAsync();
         }
+
+        public async Task CreateClass(ClassModel Class)
+        {
+            _flowContext.ClassModels.Add(Class);
+            await _flowContext.SaveChangesAsync();
+        }
     }
 }

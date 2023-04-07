@@ -32,10 +32,20 @@ namespace FlowPanelApp.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Create(School school)
+        public async Task<IActionResult> Create(School school, IFormFile file)
         {
             try
             {
+                if (file != null && file.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        file.CopyTo(memoryStream);
+                        byte[] bytes = memoryStream.ToArray();
+
+                        school.Logo = bytes;
+                    }
+                }
                 await _schoolService.CreateSchool(school);
                 return RedirectToAction("Index");
             }
