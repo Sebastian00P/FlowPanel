@@ -20,18 +20,14 @@ namespace FlowPanelApp.Controllers
         {
             _schoolService = schoolService;
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var model = await _schoolService.GetAll();
-            foreach (var item in model)
-            {
-               //item.Logo = Convert.ToBase64String(item.Logo);
-            }
-            
+            var model = await _schoolService.GetAll();                 
             return View(model);
         }
-       
 
+        [Authorize]
         public IActionResult CreateSchool()
         {
             return View();
@@ -49,7 +45,7 @@ namespace FlowPanelApp.Controllers
                 return RedirectToAction("Index");
             }        
         }
-              
+        [Authorize]
         public IActionResult EditSchool(long SchoolId)
         {
             var model = _schoolService.GetSchoolById(SchoolId);
@@ -78,6 +74,11 @@ namespace FlowPanelApp.Controllers
                 ViewBag.Message = ex.Message;
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult SchoolDetails(long schoolId)
+        {
+            return RedirectToAction("Index", "Classes", new {schoolID = schoolId});
         }
     }
 }

@@ -40,19 +40,21 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.SchoolName)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logo)
+            <td style="vertical-align:middle;">
+                    @{
+                        string base64Image = Convert.ToBase64String(item.Logo);
+                        <img src="data:image/png;base64, @base64Image" width="80" />
+                    }              
             </td>
-            <td>
-                     @Html.ActionLink("Edit", "EditSchool", new { SchoolId=item.SchoolId }) |
-               @* <a asp-action="EditSchool" asp-route-id="@item.SchoolId">Edit</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.SchoolId">Delete</a>
+            <td style="vertical-align:middle;">
+                    @Html.ActionLink("Edit", "EditSchool", new { SchoolId=item.SchoolId }) |
+                    @Html.ActionLink("Details", "SchoolDetails", new { SchoolId=item.SchoolId })         
             </td>
         </tr>
 }

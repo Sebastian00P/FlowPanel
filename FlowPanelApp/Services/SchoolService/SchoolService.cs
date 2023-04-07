@@ -37,5 +37,6 @@ namespace FlowPanelApp.Services.SchoolService
             _flowContext.Schools.Update(school);
             await _flowContext.SaveChangesAsync();
         }
+
     }
 }
