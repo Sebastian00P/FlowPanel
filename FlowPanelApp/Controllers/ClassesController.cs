@@ -22,9 +22,12 @@ namespace FlowPanelApp.Controllers
         [Authorize]
         public async Task<IActionResult> Index(long schoolID)
         {
-            SchoolId = schoolID;
-            var school = _schoolService.GetSchoolById(schoolID);
-            var model = await _classService.GetClassesBySchoolId(schoolID);
+            if(schoolID != 0)
+            {
+                SchoolId = schoolID;
+            }        
+            var school = _schoolService.GetSchoolById(SchoolId);
+            var model = await _classService.GetClassesBySchoolId(SchoolId);
             foreach (var item in model)
             {
                 item.school = school;
@@ -32,7 +35,7 @@ namespace FlowPanelApp.Controllers
             return View(model);
         }
         [Authorize]
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
