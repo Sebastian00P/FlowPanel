@@ -17,7 +17,7 @@ namespace FlowPanelApp.Services.ClassService
 
         public async Task<List<ClassModel>> GetClassesBySchoolId(long schoolId)
         {
-            return await _flowContext.ClassModels.Where(x => x.SchoolId == schoolId).ToListAsync();
+            return await _flowContext.ClassModels.Where(y => y.SchoolId == schoolId).ToListAsync();
         }
 
         public async Task CreateClass(ClassModel Class)

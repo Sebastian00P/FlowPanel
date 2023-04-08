@@ -12,5 +12,6 @@ namespace FlowPanelApp.Services.SchoolService
         Task CreateSchool(School school);
         School GetSchoolById(long schoolID);
         Task UpdateSchool(School school);
+        Task<string> GetSchoolNameBySchoolId(long schoolId);
     }
 }

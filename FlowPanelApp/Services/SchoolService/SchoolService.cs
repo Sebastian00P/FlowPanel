@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FlowPanelApp.Services.SchoolService
@@ -36,6 +37,10 @@ namespace FlowPanelApp.Services.SchoolService
         {
             _flowContext.Schools.Update(school);
             await _flowContext.SaveChangesAsync();
+        }
+        public async Task<string> GetSchoolNameBySchoolId(long schoolId)
+        {
+            return await _flowContext.Schools.Where(x => x.SchoolId == schoolId).Select(x => x.SchoolName).FirstOrDefaultAsync();
         }
 
     }
