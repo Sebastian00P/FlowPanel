@@ -4,14 +4,16 @@ using FlowPanelApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FlowPanelApp.Migrations
 {
     [DbContext(typeof(FlowContext))]
-    partial class FlowContextModelSnapshot : ModelSnapshot
+    [Migration("20230403143521_databaseModel")]
+    partial class databaseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,9 +73,6 @@ namespace FlowPanelApp.Migrations
 
                     b.Property<string>("GradeName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("GradeValue")
-                        .HasColumnType("float");
 
                     b.HasKey("GradeId");
 

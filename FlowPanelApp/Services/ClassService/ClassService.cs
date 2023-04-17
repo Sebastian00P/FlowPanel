@@ -25,5 +25,15 @@ namespace FlowPanelApp.Services.ClassService
             _flowContext.ClassModels.Add(Class);
             await _flowContext.SaveChangesAsync();
         }
+        public async Task EditClass(ClassModel Class)
+        {
+            _flowContext.ClassModels.Update(Class);
+            await _flowContext.SaveChangesAsync();
+        }
+        public async Task<ClassModel> GetClassById(long classId)
+        {
+            
+            return await _flowContext.ClassModels.Where(x => x.ClassId == classId).FirstOrDefaultAsync();
+        }
     }
 }

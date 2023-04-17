@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Classes</h1>
+<h1>Klasy</h1>
 
 <p>
     <a asp-action="Create">
         <div class="float-right">
-            <input type="button" class="btn btn-primary" value="Create class" />
+            <input type="button" class="btn btn-primary" value="Dodaj nową klasę" />
         </div>
     </a>
 </p>
@@ -18,10 +18,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ClassName)
+                Nazwa klasy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.school)
+                Nazwa szkoły
             </th>
             <th></th>
         </tr>
@@ -39,8 +39,8 @@
 
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
-                    @Html.ActionLink("Students", "ClassDetails", new { ClassId=item.ClassId })
+                    @Html.ActionLink("Edit", "EditClass", new { ClassId=item.ClassId }) |
+                    @Html.ActionLink("Students", "ClassDetails", new { ClassId=item.ClassId }) |
                 <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>
             </td>
         </tr>

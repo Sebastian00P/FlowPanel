@@ -8,5 +8,7 @@ namespace FlowPanelApp.Services.ClassService
     {
         Task<List<ClassModel>> GetClassesBySchoolId(long schoolId);
         Task CreateClass(ClassModel Class);
+        Task EditClass(ClassModel Class);
+        Task<ClassModel> GetClassById(long classId);
     }
 }

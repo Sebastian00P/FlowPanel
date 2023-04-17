@@ -51,5 +51,19 @@ namespace FlowPanelApp.Controllers
         {
             return RedirectToAction("Index", "Student", new { ClassId = ClassId });
         }
+
+        [Authorize]
+        public async Task<IActionResult> Edit(long classId)
+        {
+            var model = await _classService.GetClassById(classId);
+            return View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditClass(ClassModel classModel)
+        {
+            await _classService.EditClass(classModel);
+            return RedirectToAction("Index", "Student", new { ClassId = classModel.ClassId });
+        }
     }
 }

@@ -19,5 +19,22 @@ namespace FlowPanelApp.Services.StudentService
         {
             return await _flowContext.Students.Where(x => x.ClassId == ClassId).ToListAsync();
         }
+
+        public async Task CreateStudent(Student student)
+        {
+            _flowContext.Students.Add(student);
+            await _flowContext.SaveChangesAsync();
+        }
+
+        public async Task<Student> GetStudentById(long studentId)
+        {
+            return await _flowContext.Students.Where(x => x.StudentId == studentId).FirstOrDefaultAsync();         
+        }
+
+        public async Task EditStudent(Student student)
+        {
+            _flowContext.Students.Update(student);
+            await _flowContext.SaveChangesAsync();
+        }
     }
 }

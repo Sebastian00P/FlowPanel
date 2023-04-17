@@ -12,12 +12,12 @@
     </span>
 }
 
-<h1>Schools</h1>
+<h1>Szkoły</h1>
 
 <p>
     <a asp-action="CreateSchool">
         <div class="float-right">
-            <input type="button" class="btn btn-primary" value="Create school"/>
+            <input type="button" class="btn btn-primary" value="Dodaj nową szkołę"/>
         </div>
     </a>
 </p>
@@ -26,13 +26,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SchoolName)
+                Nazwa szkoły
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                Adres szkoły
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Logo)
+                Logo
             </th>
             <th></th>
         </tr>

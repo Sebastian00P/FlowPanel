@@ -1,7 +1,9 @@
 using FlowPanelApp.Context;
 using FlowPanelApp.Services.AppService;
 using FlowPanelApp.Services.ClassService;
+using FlowPanelApp.Services.CourseService;
 using FlowPanelApp.Services.SchoolService;
+using FlowPanelApp.Services.StudentService;
 using FlowPanelApp.Services.UserService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +46,8 @@ namespace FlowPanelApp
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<ISchoolService, SchoolService>();
             services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ICourseService, CourseService>();
             
         }
 
