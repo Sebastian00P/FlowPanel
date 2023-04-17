@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FlowPanelApp.Models.Grade>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Oceny</h1>
+
+<p>
+    <a asp-action="Create">
+        <div class="float-right">
+            <input type="button" class="btn btn-primary" value="Dodaj nową ocenę" />
+        </div>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Opis
+            </th>
+            <th>
+                Ocena
+            </th>
+            <th>
+                Data wpisu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeValue)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddDate)
+                </td>
+           
+            <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { gradeId=item.GradeId }) |                         
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

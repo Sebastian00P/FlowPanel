@@ -9,7 +9,7 @@ namespace FlowPanelApp.Controllers
 {
     public class ClassesController : Controller
     {
-        private static long SchoolId { get; set; }
+        private static long SchoolId = 0;
         private readonly IClassService _classService;
         private readonly ISchoolService _schoolService;
 
@@ -62,8 +62,9 @@ namespace FlowPanelApp.Controllers
         [Authorize]
         public async Task<IActionResult> EditClass(ClassModel classModel)
         {
+            classModel.SchoolId = SchoolId;
             await _classService.EditClass(classModel);
-            return RedirectToAction("Index", "Student", new { ClassId = classModel.ClassId });
+            return RedirectToAction("Index", "Classes", new { schoolId = classModel.SchoolId });
         }
     }
 }

@@ -14,6 +14,8 @@ namespace FlowPanelApp.Models
         public long GradeId { get; set; }
         public string GradeName { get; set; }
         public double GradeValue { get; set; }
+        public bool? IsActive { get; set; }
+        public DateTime? AddDate { get; set; }
         public virtual Course Course { get; set; }
         public long CourseId { get; set; }
     }

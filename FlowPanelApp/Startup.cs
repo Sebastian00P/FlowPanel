@@ -2,6 +2,7 @@ using FlowPanelApp.Context;
 using FlowPanelApp.Services.AppService;
 using FlowPanelApp.Services.ClassService;
 using FlowPanelApp.Services.CourseService;
+using FlowPanelApp.Services.GradeService;
 using FlowPanelApp.Services.SchoolService;
 using FlowPanelApp.Services.StudentService;
 using FlowPanelApp.Services.UserService;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,6 +50,7 @@ namespace FlowPanelApp
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IGradeService, GradeService>();
             
         }
 
@@ -71,7 +74,17 @@ namespace FlowPanelApp
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
+
+            app.UseRequestLocalization();
+
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US"); //to psuje datetima
+            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US"); 
+            System.Globalization.CultureInfo customCulture = new CultureInfo("en-US");
+            customCulture.NumberFormat.NumberDecimalSeparator = ".";
            
+           
+            
+
 
             app.UseEndpoints(endpoints =>
             {

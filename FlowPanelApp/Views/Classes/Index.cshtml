@@ -39,8 +39,8 @@
 
             </td>
             <td>
-                    @Html.ActionLink("Edit", "EditClass", new { ClassId=item.ClassId }) |
-                    @Html.ActionLink("Students", "ClassDetails", new { ClassId=item.ClassId }) |
+                    @Html.ActionLink("Edytuj", "Edit", new { ClassId=item.ClassId }) |
+                    @Html.ActionLink("Lista studentów", "ClassDetails", new { ClassId=item.ClassId }) |
                 <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>
             </td>
         </tr>

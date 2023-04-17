@@ -9,7 +9,7 @@ namespace FlowPanelApp.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;
-        private static long StudentId;
+        private static long StudentId = 0;
 
         public CourseController(ICourseService courseService)
         {
@@ -21,7 +21,7 @@ namespace FlowPanelApp.Controllers
             {
                 StudentId = studentId;
             }
-            var model = await _courseService.GetCoursesByStudentId(studentId);
+            var model = await _courseService.GetCoursesByStudentId(StudentId);
             return View(model);
         }
 
@@ -44,12 +44,17 @@ namespace FlowPanelApp.Controllers
             var model = await _courseService.GetCourseById(courseId);
             return View(model);
         }
-
+        [Authorize]
         public async Task<IActionResult> EditCourse(Course course)
         {
             course.StudentId = StudentId;
             await _courseService.CreateCourse(course);
             return RedirectToAction("Index", new { studentId = course.StudentId });
+        }
+        [Authorize]
+        public IActionResult CourseDetails(long courseId)
+        {
+            return RedirectToAction("Index", "Grade", new { CourseId = courseId });
         }
     }
 }
