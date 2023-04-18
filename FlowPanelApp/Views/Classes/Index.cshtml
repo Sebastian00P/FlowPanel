@@ -4,12 +4,25 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet"/>
 
-<h1>Klasy</h1>
+</head>
+<div class="return-section">
+    <div>
+        <h1>Klasy</h1>
+    </div>
+    <div class="float-right" style="padding: 5px">                  
+        <button class="btn btn-secondary comeback-btn" onclick="location.href='@Url.Action("Index", "School")'">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>           
+    </div>
+</div>
+
 
 <p>
     <a asp-action="Create">
-        <div class="float-right" style="padding: 10px">
+        <div class="float-left" style="padding-bottom: 5px;">
             <input type="button" class="btn btn-primary" value="Dodaj nową klasę" />
         </div>
     </a>
@@ -35,18 +48,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.school.SchoolName)
             </td>
-            <td>
-
-            </td>
+            
             <td style="vertical-align:middle;">                  
                 <div class="float-right" style="padding: 5px">
-                        <input type="button" class="btn btn-info" value="Edytuj" onclick="location.href='@Url.Action("Edit", "Classes", new { ClassId=item.ClassId })'" />
+                    <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("Edit", "Classes", new { ClassId=item.ClassId })'">
+                        <i class="fa-solid fa fa-pencil"></i>
+                    </button>
                 </div>
                 <div class="float-right" style="padding: 5px">
-                        <input type="button" class="btn btn-secondary" value="Studenci" onclick="location.href='@Url.Action("ClassDetails", "Classes", new { ClassId=item.ClassId })'" />
+                    <button class="btn btn-success comeback-btn" onclick="location.href='@Url.Action("ClassDetails", "Classes", new { ClassId=item.ClassId })'">
+                        <i class="fa-solid fa fa-file-lines"></i>
+                    </button>
                 </div>                     
             </td>          
         </tr>
     }
     </tbody>
 </table>
+
+<style>
+    .return-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .comeback-btn{
+        border-radius: 50%;   
+    }
+</style>

@@ -4,12 +4,25 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
 
-<h1>Oceny</h1>
+</head>
+
+<div class="return-section">
+    <div>
+        <h1>Oceny</h1>
+    </div>
+    <div class="float-right" style="padding: 5px">
+        <button class="btn btn-secondary comeback-btn" onclick="location.href='@Url.Action("Index", "Course")'">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
 
 <p>
     <a asp-action="Create">
-        <div class="float-right" style="padding: 10px">
+        <div class="float-left" style="padding-bottom: 5px;">
             <input type="button" class="btn btn-primary" value="Dodaj nową ocenę" />
         </div>
     </a>
@@ -43,10 +56,23 @@
             </td>
             <td style="vertical-align:middle;">                  
                 <div class="float-right" style="padding: 5px">
-                        <input type="button" class="btn btn-info" value="Edytuj" onclick="location.href='@Url.Action("Edit", "Grade", new { gradeId=item.GradeId })'" />
+                    <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("Edit", "Grade", new { gradeId=item.GradeId })'">
+                        <i class="fa-solid fa fa-pencil"></i>
+                    </button>
                 </div>                                 
             </td>
         </tr>
     }
     </tbody>
 </table>
+<style>
+    .return-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .comeback-btn {
+        border-radius: 50%;
+    }
+</style>

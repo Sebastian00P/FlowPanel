@@ -16,5 +16,7 @@ namespace FlowPanelApp.Models
         public virtual ICollection<Student> Students{ get; set; }
         public virtual School school { get; set; }
         public long SchoolId { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public long TeacherId { get; set; }
     }
 }
