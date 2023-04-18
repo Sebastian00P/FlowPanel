@@ -23,7 +23,14 @@ namespace FlowPanelApp.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var model = await _schoolService.GetAll();                 
+            var model = await _schoolService.GetAll();    
+            foreach (var item in model)
+            {
+                if(item.Logo == null)
+                {
+                    item.Logo = new byte[0];
+                }
+            }
             return View(model);
         }
 
@@ -75,6 +82,10 @@ namespace FlowPanelApp.Controllers
 
                         school.Logo = bytes;
                     }
+                }
+                else
+                {
+                    school.Logo = await _schoolService.GetSchoolLogoBySchoolId(school.SchoolId);
                 }
                 await _schoolService.UpdateSchool(school);
                 return RedirectToAction("Index");

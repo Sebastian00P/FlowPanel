@@ -76,14 +76,15 @@ namespace FlowPanelApp
             app.UseCookiePolicy();
 
             app.UseRequestLocalization();
-
-            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US"); //to psuje datetima
-            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US"); 
-            System.Globalization.CultureInfo customCulture = new CultureInfo("en-US");
+         
+            System.Globalization.CultureInfo customCulture = new CultureInfo("pl-PL");
             customCulture.NumberFormat.NumberDecimalSeparator = ".";
-           
-           
-            
+
+            CultureInfo.DefaultThreadCurrentCulture = customCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = customCulture;
+
+
+
 
 
             app.UseEndpoints(endpoints =>

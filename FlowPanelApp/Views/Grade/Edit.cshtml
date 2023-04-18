@@ -14,24 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="GradeId" />
             <div class="form-group">
-                <label asp-for="GradeName" class="control-label"></label>
+                <label class="control-label">Nazwa</label>
                 <input asp-for="GradeName" class="form-control" />
                 <span asp-validation-for="GradeName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GradeValue" class="control-label"></label>
+                <label class="control-label">Ocena</label>
                 <input asp-for="GradeValue" class="form-control" type="number" min="1" max="6" step="0.5" />
                 <span asp-validation-for="GradeValue" class="text-danger"></span>
             </div>         
             <div class="form-group">
-                <input type="submit" value="Edytuj" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Wróć do listy</a>
+    <div class="float-right" style="padding: 5px">
+        <input type="button" class="btn btn-secondary" value="Wróć do listy" onclick="location.href='@Url.Action("Index", "Grade")'" />
+    </div>
 </div>
 
 @section Scripts {

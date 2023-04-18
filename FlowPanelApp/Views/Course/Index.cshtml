@@ -9,7 +9,7 @@
 
 <p>
     <a asp-action="Create">
-        <div class="float-right">
+        <div class="float-right" style="padding: 10px">
             <input type="button" class="btn btn-primary" value="Dodaj nowy kurs" />
         </div>
     </a>
@@ -24,17 +24,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseName)
-            </td>         
-            <td>
-                    @Html.ActionLink("Edytuj", "Edit", new { courseId=item.CourseId }) |
-                    @Html.ActionLink("Oceny", "CourseDetails", new { courseId=item.CourseId }) |
-                <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
-            </td>
+            </td> 
+            <td style="vertical-align:middle;">                  
+                <div class="float-right" style="padding: 5px">
+                        <input type="button" class="btn btn-info" value="Edytuj" onclick="location.href='@Url.Action("Edit", "Course", new { courseId=item.CourseId })'" />
+                </div>
+                <div class="float-right" style="padding: 5px">
+                        <input type="button" class="btn btn-secondary" value="Oceny" onclick="location.href='@Url.Action("CourseDetails", "Course", new { courseId=item.CourseId })'" />
+                </div>                     
+            </td>     
         </tr>
-}
+    }
     </tbody>
 </table>

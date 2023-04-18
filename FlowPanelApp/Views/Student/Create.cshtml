@@ -5,48 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Dodaj nowego studenta</h1>
 
-<h4>Student</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateNewStudent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label class="control-label">Imię</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label class="control-label">Nazwisko</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
+                <label class="control-label">Wiek</label>
                 <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pesel" class="control-label"></label>
+                <label class="control-label">Pesel</label>
                 <input asp-for="Pesel" class="form-control" />
                 <span asp-validation-for="Pesel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
+                <label class="control-label">Adres zamieszkania</label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>          
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <div class="float-right" style="padding: 5px">
+        <input type="button" class="btn btn-secondary" value="Wróć do listy" onclick="location.href='@Url.Action("Index", "Student")'" />
+    </div>
 </div>
 
 @section Scripts {

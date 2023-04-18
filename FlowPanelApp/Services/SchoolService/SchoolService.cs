@@ -43,5 +43,10 @@ namespace FlowPanelApp.Services.SchoolService
             return await _flowContext.Schools.Where(x => x.SchoolId == schoolId).Select(x => x.SchoolName).FirstOrDefaultAsync();
         }
 
+        public async Task<byte[]> GetSchoolLogoBySchoolId(long schoolId)
+        {
+            return await _flowContext.Schools.Where(x => x.SchoolId == schoolId).Select(x => x.Logo).FirstOrDefaultAsync();
+        }
+
     }
 }

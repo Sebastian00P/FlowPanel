@@ -13,7 +13,7 @@
         <form asp-action="CreateCourse">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CourseName" class="control-label"></label>
+                <label class="control-label">Nazwa kursu</label>
                 <input asp-for="CourseName" class="form-control" />
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>         
@@ -25,7 +25,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Wróć do listy</a>
+    <div class="float-right" style="padding: 5px">
+        <input type="button" class="btn btn-secondary" value="Wróć do listy" onclick="location.href='@Url.Action("Index", "Course")'" />
+    </div>
 </div>
 
 @section Scripts {
