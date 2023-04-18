@@ -21,5 +21,26 @@ namespace FlowPanelApp.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ClassModel>()
+                .HasOne(x => x.Teacher)
+                .WithOne()
+                .HasForeignKey<ClassModel>(x => x.TeacherId);
+
+            modelBuilder.Entity<ClassModel>()
+                .HasMany(x => x.Students)
+                .WithOne(x => x.Class)
+                .HasForeignKey(x => x.ClassId);
+
+            modelBuilder.Entity<Teacher>()
+                .HasOne(x => x.ClassModel)
+                .WithOne(x => x.Teacher)
+                .HasForeignKey<Teacher>(x => x.ClassId);
+
+        }
     }
 }

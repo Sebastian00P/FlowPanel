@@ -4,14 +4,16 @@ using FlowPanelApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FlowPanelApp.Migrations
 {
     [DbContext(typeof(FlowContext))]
-    partial class FlowContextModelSnapshot : ModelSnapshot
+    [Migration("20230418191259_TeacherTable")]
+    partial class TeacherTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,12 +34,18 @@ namespace FlowPanelApp.Migrations
                     b.Property<long>("SchoolId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("SchoolId1")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("TeacherId")
                         .HasColumnType("bigint");
 
                     b.HasKey("ClassId");
 
-                    b.HasIndex("SchoolId");
+                    b.HasIndex("SchoolId")
+                        .IsUnique();
+
+                    b.HasIndex("SchoolId1");
 
                     b.ToTable("Class");
                 });
@@ -210,10 +218,14 @@ namespace FlowPanelApp.Migrations
             modelBuilder.Entity("FlowPanelApp.Models.ClassModel", b =>
                 {
                     b.HasOne("FlowPanelApp.Models.School", "school")
-                        .WithMany("Classes")
-                        .HasForeignKey("SchoolId")
+                        .WithOne()
+                        .HasForeignKey("FlowPanelApp.Models.ClassModel", "SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FlowPanelApp.Models.School", null)
+                        .WithMany("Classes")
+                        .HasForeignKey("SchoolId1");
 
                     b.Navigation("school");
                 });

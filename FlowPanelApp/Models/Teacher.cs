@@ -14,7 +14,8 @@ namespace FlowPanelApp.Models
         public string Pesel { get; set; }
         public int Age { get; set; }
         public byte[] Picture { get; set; }
-        public virtual ClassModel Class { get; set; }
+        [ForeignKey(nameof(ClassId))]
+        public virtual ClassModel ClassModel { get; set; }
         public long ClassId { get; set; }
     }
 }
