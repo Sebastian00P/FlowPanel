@@ -27,6 +27,13 @@ namespace FlowPanelApp.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ClassModel>()
+              .HasOne(x => x.School)
+              .WithMany(x => x.Classes)
+              .HasForeignKey(x => x.SchoolId);
+              
+              
+
+            modelBuilder.Entity<ClassModel>()
                 .HasOne(x => x.Teacher)
                 .WithOne()
                 .HasForeignKey<ClassModel>(x => x.TeacherId);
@@ -34,12 +41,7 @@ namespace FlowPanelApp.Context
             modelBuilder.Entity<ClassModel>()
                 .HasMany(x => x.Students)
                 .WithOne(x => x.Class)
-                .HasForeignKey(x => x.ClassId);
-
-            modelBuilder.Entity<ClassModel>()
-              .HasOne(x => x.School)
-              .WithMany(x => x.Classes)
-              .HasForeignKey(x => x.SchoolId);
+                .HasForeignKey(x => x.ClassId);         
 
             modelBuilder.Entity<Teacher>()
                 .HasOne(x => x.ClassModel)
@@ -49,8 +51,7 @@ namespace FlowPanelApp.Context
             modelBuilder.Entity<School>()
                 .HasMany(x => x.Classes)
                 .WithOne(x => x.School)
-                .HasForeignKey(x =>x.SchoolId);
-                
+                .HasForeignKey(x => x.SchoolId);                            
 
         }
     }
