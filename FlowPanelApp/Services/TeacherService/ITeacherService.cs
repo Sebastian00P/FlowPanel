@@ -7,5 +7,7 @@ namespace FlowPanelApp.Services.TeacherService
     {
         Task<Teacher> GetTeacherByClassId(long ClassId);
         Task CreateTeacher(Teacher teacher);
+        Task EditTeacher(Teacher teacher);
+        Task<byte[]> GetTeacherPictureById(long teacherId);
     }
 }

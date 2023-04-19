@@ -84,6 +84,7 @@ namespace FlowPanelApp.Controllers
         [Authorize]
         public async Task<IActionResult> TeacherDetails(long classId)
         {
+            ClassId = classId;
             var model = await _teacherService.GetTeacherByClassId(classId);
             return View(model);
         }
@@ -104,13 +105,50 @@ namespace FlowPanelApp.Controllers
                 }
                 teacher.ClassId = ClassId;
                 await _teacherService.CreateTeacher(teacher);
-                return RedirectToAction("Index", "Classes", new { schoolId = 0 });
+                return RedirectToAction("Index", "Classes", new { schoolID = 0 });
             }
             catch(Exception ex) 
             {
                 ViewBag.Message = ex.Message;
                 return RedirectToAction("Index");
             }        
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditTeacher(Teacher teacher, IFormFile file)
+        {
+            try
+            {
+                if (file != null && file.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        file.CopyTo(memoryStream);
+                        byte[] bytes = memoryStream.ToArray();
+
+                        teacher.Picture = bytes;
+                    }
+                }
+                else
+                {
+                    teacher.Picture = await _teacherService.GetTeacherPictureById(teacher.TeacherId);
+                }
+                teacher.ClassId = ClassId;
+                await _teacherService.EditTeacher(teacher);
+                return RedirectToAction("Index", "Classes", new { schoolID = 0 });
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return RedirectToAction("Index");
+            }          
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditViewTeacher(long classId)
+        {
+            var model = await _teacherService.GetTeacherByClassId(classId);
+            return View(model);
         }
     }
 }

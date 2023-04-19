@@ -25,5 +25,16 @@ namespace FlowPanelApp.Services.TeacherService
             _flowContext.Teachers.Add(teacher);
             await _flowContext.SaveChangesAsync();
         }
+
+        public async Task EditTeacher(Teacher teacher)
+        {
+            _flowContext.Teachers.Update(teacher);
+            await _flowContext.SaveChangesAsync();
+        }
+
+        public async Task<byte[]> GetTeacherPictureById(long teacherId)
+        {
+            return await _flowContext.Teachers.Where(x => x.TeacherId == teacherId).Select(x => x.Picture).FirstOrDefaultAsync();
+        }
     }
 }

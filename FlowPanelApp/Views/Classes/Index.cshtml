@@ -34,7 +34,7 @@
                 Nazwa klasy
             </th>
             <th>
-                Nazwa szkoły
+                Opiekun
             </th>
             <th></th>
         </tr>
@@ -46,7 +46,14 @@
                 @Html.DisplayFor(modelItem => item.ClassName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.School.SchoolName)
+                @if(item.Teacher != null){
+                    string fullName = item.Teacher.Name + " " + item.Teacher.LastName;
+                    @fullName;
+                }
+                else{
+                    string info = "Brak";
+                    @info;
+                }
             </td>
             
             <td style="vertical-align:middle;">                  
