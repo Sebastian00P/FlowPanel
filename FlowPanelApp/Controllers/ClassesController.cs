@@ -3,7 +3,10 @@ using FlowPanelApp.Services.ClassService;
 using FlowPanelApp.Services.SchoolService;
 using FlowPanelApp.Services.TeacherService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace FlowPanelApp.Controllers
@@ -11,6 +14,7 @@ namespace FlowPanelApp.Controllers
     public class ClassesController : Controller
     {
         private static long SchoolId = 0;
+        private static long ClassId = 0;
         private readonly IClassService _classService;
         private readonly ISchoolService _schoolService;
         private readonly ITeacherService _teacherService;
@@ -71,8 +75,9 @@ namespace FlowPanelApp.Controllers
         }
 
         [Authorize]
-        public IActionResult CreateTeacher()
+        public IActionResult CreateTeacher(long classId)
         {
+            ClassId = classId;
             return View();
         }
 
@@ -81,6 +86,31 @@ namespace FlowPanelApp.Controllers
         {
             var model = await _teacherService.GetTeacherByClassId(classId);
             return View(model);
+        }
+
+        public async Task<IActionResult> CreateNewTeacher(Teacher teacher, IFormFile file)
+        {
+            try
+            {
+                if (file != null && file.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        file.CopyTo(memoryStream);
+                        byte[] bytes = memoryStream.ToArray();
+
+                        teacher.Picture = bytes;
+                    }
+                }
+                teacher.ClassId = ClassId;
+                await _teacherService.CreateTeacher(teacher);
+                return RedirectToAction("Index", "Classes", new { schoolId = 0 });
+            }
+            catch(Exception ex) 
+            {
+                ViewBag.Message = ex.Message;
+                return RedirectToAction("Index");
+            }        
         }
     }
 }

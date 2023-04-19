@@ -6,5 +6,6 @@ namespace FlowPanelApp.Services.TeacherService
     public interface ITeacherService
     {
         Task<Teacher> GetTeacherByClassId(long ClassId);
+        Task CreateTeacher(Teacher teacher);
     }
 }

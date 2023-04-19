@@ -59,7 +59,24 @@
                     <button class="btn btn-success comeback-btn" onclick="location.href='@Url.Action("ClassDetails", "Classes", new { ClassId=item.ClassId })'">
                         <i class="fa-solid fa fa-file-lines"></i>
                     </button>
-                </div>                     
+                </div>
+                @if(item.Teacher != null)
+                {
+                <div class="float-right" style="padding: 5px">
+                    <button class="btn btn-primary comeback-btn" onclick="location.href='@Url.Action("TeacherDetails", "Classes", new { ClassId=item.ClassId })'">
+                        <i class="fa-solid fa fa-circle-info"></i>
+                    </button>
+                </div>
+                }
+                else
+                {
+                <div class="float-right" style="padding: 5px">
+                    <button class="btn btn-primary comeback-btn" onclick="location.href='@Url.Action("CreateTeacher", "Classes", new { classId=item.ClassId })'">
+                        <i class="fa-solid fa fa-circle-plus"></i>
+                    </button>
+                </div>
+                }
+                
             </td>          
         </tr>
     }

@@ -19,5 +19,11 @@ namespace FlowPanelApp.Services.TeacherService
         {
             return await _flowContext.Teachers.Where(x => x.ClassId == ClassId).FirstOrDefaultAsync();
         }
+
+        public async Task CreateTeacher(Teacher teacher)
+        {
+            _flowContext.Teachers.Add(teacher);
+            await _flowContext.SaveChangesAsync();
+        }
     }
 }
