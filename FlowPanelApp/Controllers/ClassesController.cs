@@ -37,7 +37,7 @@ namespace FlowPanelApp.Controllers
             foreach (var item in model)
             {
                 item.Teacher = await _teacherService.GetTeacherByClassId(item.ClassId);
-                item.school = school;
+                item.School = school;
             }
             return View(model);
         }

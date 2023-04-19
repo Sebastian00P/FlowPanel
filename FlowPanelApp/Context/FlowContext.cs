@@ -36,13 +36,21 @@ namespace FlowPanelApp.Context
                 .WithOne(x => x.Class)
                 .HasForeignKey(x => x.ClassId);
 
+            modelBuilder.Entity<ClassModel>()
+              .HasOne(x => x.School)
+              .WithMany(x => x.Classes)
+              .HasForeignKey(x => x.SchoolId);
+
             modelBuilder.Entity<Teacher>()
                 .HasOne(x => x.ClassModel)
                 .WithOne(x => x.Teacher)
                 .HasForeignKey<Teacher>(x => x.ClassId);
 
             modelBuilder.Entity<School>()
-                .HasMany(x => x.Classes);
+                .HasMany(x => x.Classes)
+                .WithOne(x => x.School)
+                .HasForeignKey(x =>x.SchoolId);
+                
 
         }
     }

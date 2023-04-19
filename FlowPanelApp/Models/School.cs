@@ -14,7 +14,7 @@ namespace FlowPanelApp.Models
         public long SchoolId { get; set; }
         public string SchoolName { get; set; }
         public string Address { get; set; }
-        public byte[] Logo { get; set; }
-        public virtual ICollection<ClassModel> Classes { get; set; }
+        public byte[] Logo { get; set; }        
+        public ICollection<ClassModel> Classes { get; set; }
     }
 }

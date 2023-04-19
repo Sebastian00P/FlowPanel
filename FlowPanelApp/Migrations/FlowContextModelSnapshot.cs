@@ -209,13 +209,13 @@ namespace FlowPanelApp.Migrations
 
             modelBuilder.Entity("FlowPanelApp.Models.ClassModel", b =>
                 {
-                    b.HasOne("FlowPanelApp.Models.School", "school")
+                    b.HasOne("FlowPanelApp.Models.School", "School")
                         .WithMany("Classes")
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("school");
+                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("FlowPanelApp.Models.Course", b =>
