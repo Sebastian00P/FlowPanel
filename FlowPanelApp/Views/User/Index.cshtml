@@ -4,26 +4,34 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
 
-<h1>Index</h1>
+</head>
+
+<h1>Użytkownicy</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateUser">
+        <div class="float-left" style="padding-bottom: 5px;">
+            <input type="button" class="btn btn-primary" value="Dodaj nowego użytkownika" />
+        </div>
+    </a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                Nazwa użytkownika
             </th>          
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                Rola
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                Status
             </th>
             <th></th>
         </tr>
@@ -43,11 +51,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
+                <td style="vertical-align:middle;">
+                    @if (item.Role != "Admin")
+                    {
+                        <div class="float-right" style="padding: 5px">
+                            <button class="btn btn-danger comeback-btn" onclick="location.href='@Url.Action("Delete", "User", new { UserId=item.UserId })'">
+                                <i class="fa-solid fa fa-trash"></i>
+                            </button>
+                        </div>
+                    }
+                </td>
         </tr>
 }
     </tbody>

@@ -49,8 +49,7 @@ namespace FlowPanelApp.Controllers
                     new Claim(ClaimTypes.Role, user.Role),
                     new Claim("DotNetCookie", "Code")
                 };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme, "Role", user.Role);
                 var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties()

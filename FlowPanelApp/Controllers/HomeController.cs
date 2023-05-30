@@ -20,7 +20,7 @@ namespace FlowPanelApp.Controllers
         }
         [Authorize]
         public IActionResult Index()
-        {
+        {           
             return View();
         }
         [Authorize]

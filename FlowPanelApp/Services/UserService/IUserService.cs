@@ -13,5 +13,6 @@ namespace FlowPanelApp.Services.UserService
         Task<List<User>> GetAll();
         Task DeleteUser(User user);
         Task EditUser(User user);
+        Task<User> GetUserById(long userId);
     }
 }
