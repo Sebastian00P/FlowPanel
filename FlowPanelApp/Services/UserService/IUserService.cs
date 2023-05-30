@@ -10,5 +10,8 @@ namespace FlowPanelApp.Services.UserService
     {
         Task AddUser(User user);
         Task<User> GetUserByUserNameAndPassword(string userName, string password);
+        Task<List<User>> GetAll();
+        Task DeleteUser(User user);
+        Task EditUser(User user);
     }
 }

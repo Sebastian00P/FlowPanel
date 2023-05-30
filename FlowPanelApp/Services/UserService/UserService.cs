@@ -35,6 +35,26 @@ namespace FlowPanelApp.Services.UserService
             var passwordHash = _appService.GetMd5Hash(password);          
             return await _flowContext.Users.Where(x => x.UserName == userName && x.Password == passwordHash).FirstOrDefaultAsync();
         }
-       
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _flowContext.Users.ToListAsync();
+        }
+        public async Task DeleteUser(User user)
+        {
+            _flowContext.Remove(user);
+            await _flowContext.SaveChangesAsync();
+        }
+        public async Task EditUser(User user)
+        {
+            _flowContext.Update(user);
+            await _flowContext.SaveChangesAsync();
+        }
+
+
+
+
+
+
     }
 }
