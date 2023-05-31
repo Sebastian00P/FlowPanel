@@ -33,8 +33,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
                             </li>
-                        }
+                        }                     
                     </ul>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <p>
+                        <a asp-action="Logout" asp-controller="Login">
+                            <div class="float-right" style="padding-bottom: 5px;">
+                                <input type="button" class="btn btn-secondary" value="Wyloguj" />
+                            </div>
+                        </a>
+                    </p>
                 </div>
             </div>
         </nav>

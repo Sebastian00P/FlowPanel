@@ -10,5 +10,6 @@ namespace FlowPanelApp.Services.GradeService
         Task CreateNewGrade(Grade grade);
         Task<Grade> GetGradeById(long gradeId);
         Task EditGrade(Grade grade);
+        Task RemoveGrade(Grade grade);
     }
 }

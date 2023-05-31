@@ -52,5 +52,11 @@ namespace FlowPanelApp.Controllers
             await _gradeService.EditGrade(grade);
             return RedirectToAction("Index", new { courseId = grade.CourseId });
         }
+        [Authorize]
+        public async Task DeleteGrade(long gradeId)
+        {
+           var grade = await _gradeService.GetGradeById(gradeId);
+            await _gradeService.RemoveGrade(grade);
+        }
     }
 }

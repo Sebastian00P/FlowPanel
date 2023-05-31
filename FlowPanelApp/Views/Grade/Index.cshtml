@@ -59,7 +59,12 @@
                     <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("Edit", "Grade", new { gradeId=item.GradeId })'">
                         <i class="fa-solid fa fa-pencil"></i>
                     </button>
-                </div>                                 
+                </div>  
+                <div class="float-right" style="padding: 5px">
+                    <button class="btn btn-danger comeback-btn" onclick="location.href='@Url.Action("DeleteGrade", "Grade", new { gradeId=item.GradeId })'">
+                        <i class="fa-solid fa fa-trash"></i>
+                    </button>
+                </div> 
             </td>
         </tr>
     }
