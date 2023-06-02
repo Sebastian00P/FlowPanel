@@ -24,7 +24,10 @@ namespace FlowPanelApp.Services.UserService
         {
             var passwordHash = _appService.GetMd5Hash(user.Password);
             user.Password = passwordHash;
-            user.Role = "User";
+            if(user.Role == null || user.Role != "Admin")
+            {
+                user.Role = "User";
+            }          
             _flowContext.Users.Add(user);
             await _flowContext.SaveChangesAsync();
         }

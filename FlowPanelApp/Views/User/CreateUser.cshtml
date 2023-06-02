@@ -13,12 +13,12 @@
         <form asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
+                <label class="control-label">Nazwa użytkownika</label>
                 <input asp-for="UserName" class="form-control" required />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
+                <label class="control-label">Hasło</label>
                 <input type="password" id="pwd" asp-for="Password" class="form-control" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
@@ -28,17 +28,24 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label class="control-label">Email</label>
                 <input asp-for="Email" class="form-control" required />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label for="roleSelect">Rola</label>
+                <select class="form-control" id="roleSelect" name="Role">
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>                  
+                </select>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <input class="form-check-input" asp-for="IsActive" /> Aktywny
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" id="createButton" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" id="createButton" class="btn btn-primary" />
             </div>
         </form>
     </div>
