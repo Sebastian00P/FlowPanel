@@ -59,6 +59,11 @@
                                 <i class="fa-solid fa fa-trash"></i>
                             </button>
                         </div>
+                        <div class="float-right" style="padding: 5px">
+                            <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("EditUser", "User", new { UserId=item.UserId })'">
+                                <i class="fa-solid fa fa-pencil"></i>
+                            </button>
+                        </div>
                     }
                 </td>
         </tr>

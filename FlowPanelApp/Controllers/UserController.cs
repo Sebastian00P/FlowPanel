@@ -67,5 +67,31 @@ namespace FlowPanelApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        [Authorize]
+        public async Task<IActionResult> EditUser(long userId)
+        {
+            if (HttpContext.User.Identities.Select(x => x.RoleClaimType == "Admin").FirstOrDefault())
+            {
+                var model = await _userService.GetUserById(userId);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [Authorize]
+        public async Task<IActionResult> Edit(User user)
+        {
+            if (HttpContext.User.Identities.Select(x => x.RoleClaimType == "Admin").FirstOrDefault())
+            {
+                await _userService.EditUser(user);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

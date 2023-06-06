@@ -49,15 +49,24 @@ namespace FlowPanelApp.Services.UserService
         }
         public async Task EditUser(User user)
         {
-            var passwordHash = _appService.GetMd5Hash(user.Password);
-            user.Password = passwordHash;
+            if(user.Password != null)
+            {
+                var passwordHash = _appService.GetMd5Hash(user.Password);
+                user.Password = passwordHash;
+            }
+            else
+            {
+                var sameUser = await GetUserById(user.UserId);
+                var pwd = sameUser.Password;
+                user.Password = pwd;
+            }
             _flowContext.Update(user);
             await _flowContext.SaveChangesAsync();
         }
         
         public async Task<User> GetUserById(long userId)
         {
-            return await _flowContext.Users.FirstOrDefaultAsync(x => x.UserId == userId);
+            return await _flowContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
     }
