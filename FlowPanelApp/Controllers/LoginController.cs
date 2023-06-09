@@ -1,4 +1,5 @@
 ﻿using FlowPanelApp.Models;
+using FlowPanelApp.Services.AppService;
 using FlowPanelApp.Services.UserService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,11 +16,13 @@ namespace FlowPanelApp.Controllers
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IAppService _appService;
         public List<User> users = null;
 
-        public LoginController(IUserService userService)
+        public LoginController(IUserService userService, IAppService appService)
         {
             _userService = userService;
+            _appService = appService;
         }
 
         public async Task<IActionResult> Login(string returnUrl = "")
@@ -42,6 +45,7 @@ namespace FlowPanelApp.Controllers
             var user = await _userService.GetUserByUserNameAndPassword(loginModel.UserName, loginModel.Password);
             if(user != null)
             {
+                _appService.HoldUserData(user);
                 var claims = new List<Claim>() 
                 {
                     new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.UserId)),

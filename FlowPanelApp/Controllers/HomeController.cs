@@ -1,4 +1,5 @@
 ﻿using FlowPanelApp.Models;
+using FlowPanelApp.Services.Announcement;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,15 +14,18 @@ namespace FlowPanelApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IAnnouncementService _announcementService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IAnnouncementService announcementService)
         {
             _logger = logger;
+            _announcementService = announcementService;
         }
         [Authorize]
-        public IActionResult Index()
-        {           
-            return View();
+        public async Task<IActionResult> Index()
+        {   
+            var model = await _announcementService.GetAll();
+            return View(model);
         }
         [Authorize]
         public IActionResult Privacy()
@@ -33,6 +37,15 @@ namespace FlowPanelApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        public async Task<IActionResult> CreateAnnouncement(Announcement announcement)
+        {
+            await _announcementService.CreateAnnouncement(announcement);
+            return RedirectToAction("Index");
         }
     }
 }

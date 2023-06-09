@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowPanelApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -9,6 +10,7 @@ namespace FlowPanelApp.Services.AppService
 {
     public class AppService : IAppService
     {
+        private static User _user;
         public string GetMd5Hash(string password)
         {
             MD5 md5Hash = MD5.Create();
@@ -22,6 +24,16 @@ namespace FlowPanelApp.Services.AppService
 
             return sBuilder.ToString();
         }
+
+        public void HoldUserData(User user)
+        {
+            _user = user;
+        }
+        public User GetCurrentSessionUserData()
+        {
+            return _user;
+        }
+            
     }
 
 }

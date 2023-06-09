@@ -1,4 +1,6 @@
 using FlowPanelApp.Context;
+using FlowPanelApp.Services.Announcement;
+using FlowPanelApp.Services.AnnouncementService;
 using FlowPanelApp.Services.AppService;
 using FlowPanelApp.Services.ClassService;
 using FlowPanelApp.Services.CourseService;
@@ -53,6 +55,7 @@ namespace FlowPanelApp
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IGradeService, GradeService>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IAnnouncementService, AnnonuncementService>();
             
         }
 
