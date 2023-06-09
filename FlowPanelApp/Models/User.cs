@@ -15,6 +15,7 @@ namespace FlowPanelApp.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public bool IsActive { get; set; }
+        public virtual ICollection<Announcement> Announcements { get; set; }
 
     }
 }
