@@ -14,7 +14,7 @@
             </p>          
         <h1 class="display-4 middle-title">Ogłoszenia</h1>
         </div>
-         
+         <div class="scroll-element">
             @foreach (var item in Model)
             {
         <div class="container blog-section">
@@ -22,8 +22,9 @@
                     <div class="modal-title">
                         <h2>@item.Subject</h2>
                     </div>
-                    <div class="creation-time-section">
+                    <div class="creation-time-section col-2">
                         <h7>@item.CreationTime</h7>
+                        <h7><b>@item.User.UserName</b></h7>
                     </div>
                 </div>
                 <div class="content">
@@ -32,11 +33,16 @@
         </div>
             }         
         </div>
+    </div>
    
 
 
 
     <style>
+    html, body {    
+        max-height: 100vh;
+        overflow: hidden; 
+    }
     .page-title{
         display: flex;
     }
@@ -71,9 +77,12 @@
       right: 0;
     }
 
-    .modal-title{
-        
-        align-items: center;
-       
+    .modal-title{       
+        align-items: center;      
+    }
+
+    .scroll-element {
+        height: 75vh; 
+        overflow-y: auto;
     }
     </style>

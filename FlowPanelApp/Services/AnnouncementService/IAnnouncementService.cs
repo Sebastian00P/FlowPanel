@@ -7,5 +7,7 @@ namespace FlowPanelApp.Services.Announcement
     {
         Task<List<Models.Announcement>> GetAll();
         Task CreateAnnouncement(Models.Announcement announcement);
+        Task<Models.Announcement> GetAnnouncementById(long announcementId);
+        Task DeActiveAnnouncement(long announcementId);
     }
 }

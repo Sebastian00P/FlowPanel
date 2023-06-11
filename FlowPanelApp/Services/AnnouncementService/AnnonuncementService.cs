@@ -2,6 +2,7 @@
 using FlowPanelApp.Models;
 using FlowPanelApp.Services.Announcement;
 using FlowPanelApp.Services.AppService;
+using FlowPanelApp.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,21 @@ namespace FlowPanelApp.Services.AnnouncementService
     {
         private readonly FlowContext _flowContext;
         private readonly IAppService _appService;
-        public AnnonuncementService(FlowContext flowContext, IAppService appService) 
+        private readonly IUserService _userService;
+        public AnnonuncementService(FlowContext flowContext, IAppService appService, IUserService userService) 
         {
             _flowContext = flowContext;
             _appService = appService;
+            _userService = userService;
         }
         public async Task<List<Models.Announcement>> GetAll()
         {
-            return await _flowContext.Announcements.Where(x => x.IsActive).ToListAsync();
+            var announcements = await _flowContext.Announcements.Where(x => x.IsActive).OrderByDescending(x => x.CreationTime).ToListAsync();
+            foreach (var item in announcements)
+            {
+                item.User = await _userService.GetUserById(item.UserId);
+            }
+            return announcements;
         }
         public async Task CreateAnnouncement(Models.Announcement announcement)
         {
