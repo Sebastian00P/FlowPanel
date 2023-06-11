@@ -38,10 +38,12 @@ namespace FlowPanelApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize]
         public async Task<IActionResult> CreateAnnouncement(Announcement announcement)
         {
             await _announcementService.CreateAnnouncement(announcement);
