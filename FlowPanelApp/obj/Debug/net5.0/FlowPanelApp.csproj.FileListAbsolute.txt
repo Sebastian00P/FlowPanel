@@ -172,3 +172,14 @@ C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\obj\Debug\net5.0\Razor\
 C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\obj\Debug\net5.0\Razor\Views\User\CreateUser.cshtml.g.cs
 C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\obj\Debug\net5.0\Razor\Views\User\EditUser.cshtml.g.cs
 C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\obj\Debug\net5.0\Razor\Views\Home\Create.cshtml.g.cs
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\Google.Protobuf.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\K4os.Compression.LZ4.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\K4os.Hash.xxHash.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\MySql.Data.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\Ubiety.Dns.Core.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\Zstandard.Net.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\MySql.EntityFrameworkCore.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\Renci.SshNet.dll
+C:\Users\Admin\Desktop\inzynierka\FlowPanel\FlowPanelApp\bin\Debug\net5.0\SshNet.Security.Cryptography.dll

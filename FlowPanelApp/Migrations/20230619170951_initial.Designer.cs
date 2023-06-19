@@ -3,35 +3,63 @@ using System;
 using FlowPanelApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FlowPanelApp.Migrations
 {
     [DbContext(typeof(FlowContext))]
-    [Migration("20230403143521_databaseModel")]
-    partial class databaseModel
+    [Migration("20230619170951_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("FlowPanelApp.Models.Announcement", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("text");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Announcements");
+                });
 
             modelBuilder.Entity("FlowPanelApp.Models.ClassModel", b =>
                 {
                     b.Property<long>("ClassId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ClassName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<long>("SchoolId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TeacherId")
                         .HasColumnType("bigint");
 
                     b.HasKey("ClassId");
@@ -45,11 +73,10 @@ namespace FlowPanelApp.Migrations
                 {
                     b.Property<long>("CourseId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CourseName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
@@ -65,14 +92,22 @@ namespace FlowPanelApp.Migrations
                 {
                     b.Property<long>("GradeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("AddDate")
+                        .HasColumnType("datetime");
 
                     b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("GradeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
+
+                    b.Property<double>("GradeValue")
+                        .HasColumnType("double");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("GradeId");
 
@@ -85,17 +120,16 @@ namespace FlowPanelApp.Migrations
                 {
                     b.Property<long>("SchoolId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("Logo")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(4000)");
 
                     b.Property<string>("SchoolName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("SchoolId");
 
@@ -106,11 +140,10 @@ namespace FlowPanelApp.Migrations
                 {
                     b.Property<long>("StudentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -119,13 +152,13 @@ namespace FlowPanelApp.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Pesel")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("StudentId");
 
@@ -134,42 +167,87 @@ namespace FlowPanelApp.Migrations
                     b.ToTable("Student");
                 });
 
+            modelBuilder.Entity("FlowPanelApp.Models.Teacher", b =>
+                {
+                    b.Property<long>("TeacherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ClassId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Pesel")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(4000)");
+
+                    b.HasKey("TeacherId");
+
+                    b.HasIndex("ClassId")
+                        .IsUnique();
+
+                    b.ToTable("Teacher");
+                });
+
             modelBuilder.Entity("FlowPanelApp.Models.User", b =>
                 {
                     b.Property<long>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("FlowPanelApp.Models.Announcement", b =>
+                {
+                    b.HasOne("FlowPanelApp.Models.User", "User")
+                        .WithMany("Announcements")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("FlowPanelApp.Models.ClassModel", b =>
                 {
-                    b.HasOne("FlowPanelApp.Models.School", "school")
+                    b.HasOne("FlowPanelApp.Models.School", "School")
                         .WithMany("Classes")
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("school");
+                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("FlowPanelApp.Models.Course", b =>
@@ -205,9 +283,22 @@ namespace FlowPanelApp.Migrations
                     b.Navigation("Class");
                 });
 
+            modelBuilder.Entity("FlowPanelApp.Models.Teacher", b =>
+                {
+                    b.HasOne("FlowPanelApp.Models.ClassModel", "ClassModel")
+                        .WithOne("Teacher")
+                        .HasForeignKey("FlowPanelApp.Models.Teacher", "ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassModel");
+                });
+
             modelBuilder.Entity("FlowPanelApp.Models.ClassModel", b =>
                 {
                     b.Navigation("Students");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("FlowPanelApp.Models.Course", b =>
@@ -223,6 +314,11 @@ namespace FlowPanelApp.Migrations
             modelBuilder.Entity("FlowPanelApp.Models.Student", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("FlowPanelApp.Models.User", b =>
+                {
+                    b.Navigation("Announcements");
                 });
 #pragma warning restore 612, 618
         }

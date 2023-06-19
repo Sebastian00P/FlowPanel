@@ -39,7 +39,8 @@ namespace FlowPanelApp
         {
             services.AddControllersWithViews();
             services.AddDbContext<FlowContext>(options =>
-            options.UseSqlServer(Configuration["ConnectionStrings:FlowPanelConnection"]));
+            //options.UseSqlServer(Configuration["ConnectionStrings:FlowPanelConnection"]));
+            options.UseMySQL(Configuration["ConnectionStrings:FlowPanelConnection"]));
             services.AddMvc();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
