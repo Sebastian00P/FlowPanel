@@ -1,47 +1,61 @@
 ﻿using FlowPanelApp.Models;
 using FlowPanelApp.Models.StudentCalendar;
+using FlowPanelApp.Models.StudentCalendar.CreateLessonViewModel;
+using FlowPanelApp.Services.CalendarService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FlowPanelApp.Controllers
 {
     public class CalendarController : Controller
     {
+        private readonly ICalendarService _calendarService;
         private static long StudentId = 0;
         private static long CalendarId = 0;
-        [Authorize]
-        public IActionResult Index(long studentId)
+
+        public CalendarController(ICalendarService calendarService)
         {
-            if (studentId != 0)
+            _calendarService = calendarService;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Index(long studentId)
+        {
+            if(studentId != 0)
             {
                 StudentId = studentId;
             }
-            var lessons = new List<Lesson>();
-            var lesson = new Lesson()
+            if (!await _calendarService.CheckIfStudentHasCalendar(StudentId))
             {
-                CalendarId = 1,
-                Day = DayOfWeek.Monday,
-                LessonId = 1,
-                StartTime = new TimeSpan(8, 0, 0),
-                EndTime = new TimeSpan(8, 45, 0),
-                NameOfSubject = "Seminarium"
-            };
-            lessons.Add(lesson);
-            var model = new Calendar()
+                await _calendarService.CreateNewCalendar(new Calendar() { StudentId = studentId});
+            }
+            var model = await _calendarService.GetCalendar(studentId);
+            if(model.CalendarId != 0)
             {
-                CalendarId = 1,
-                StudentId = 1,
-                Lessons = lessons
-            };
-            
+                CalendarId = model.CalendarId;
+            }
+                    
             return View(model);
         }
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
+        {          
+            var model = new CreateLessonViewModel()
+            {
+                CalendarId = CalendarId,
+                Courses = await _calendarService.GetCoursesNames(StudentId)
+            };
+            return View(model);
+        }
+        [Authorize]
+        public async Task<IActionResult> CreateLesson(Lesson lesson)
         {
-            return View();
+            lesson.CalendarId = CalendarId;
+            await _calendarService.CreateNewLesson(lesson);
+            return RedirectToAction("Index","Calendar", new { studentId = StudentId });
         }
     }
 }

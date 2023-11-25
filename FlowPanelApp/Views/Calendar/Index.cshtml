@@ -4,7 +4,13 @@
     ViewData["Title"] = "Plan zajęć";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@functions {
+    int GetAdjustedDay(DayOfWeek day)
+    {
+        // Dostosuj numerację dni zgodnie z planem zajęć
+        return ((int)day + 6) % 7 + 1; // Dodaj 6 i wykonaj modulo 7, a następnie dodaj 1
+    }
+}
 <head>
     <link href="~/font-awesome/css/all.css" rel="stylesheet" />
    
@@ -29,6 +35,7 @@
         </a>
     </p>
 
+        
     <table>
         <thead>
             <tr>
@@ -43,42 +50,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var lesson in Model.Lessons.OrderBy(l => l.EndTime).ThenBy(l => l.Day))
+            @foreach (var lessonGroup in Model.Lessons.OrderBy(l => l.EndTime).ThenBy(l => l.Day).GroupBy(l => new { l.StartTime, l.EndTime }))
             {
                 <tr>
-                    <td>@lesson.StartTime.ToString("hh\\:mm") - @lesson.EndTime.ToString("hh\\:mm")</td>
-                    <td>@if (lesson.Day == DayOfWeek.Monday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Tuesday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Wednesday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Thursday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Friday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Saturday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
-                    <td>@if (lesson.Day == DayOfWeek.Sunday)
-                        {
-                            @lesson.NameOfSubject
-                        }</td>
+                    <td>@lessonGroup.Key.StartTime.ToString("hh\\:mm") - @lessonGroup.Key.EndTime.ToString("hh\\:mm")</td>
+                    @for (int dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+                    {
+                        var lessonForDay = lessonGroup.FirstOrDefault(l => GetAdjustedDay(l.Day) == dayOfWeek + 1);
+                        <td>@(lessonForDay != null ? lessonForDay.NameOfSubject : "")</td>
+                    }
                 </tr>
             }
         </tbody>
     </table>
+   
 
 </body>
 @*<div>
