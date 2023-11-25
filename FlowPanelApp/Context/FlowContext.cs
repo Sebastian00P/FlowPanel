@@ -1,4 +1,5 @@
 ﻿using FlowPanelApp.Models;
+using FlowPanelApp.Models.StudentCalendar;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace FlowPanelApp.Context
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
