@@ -32,7 +32,7 @@ namespace FlowPanelApp.Controllers
             {
                 await _calendarService.CreateNewCalendar(new Calendar() { StudentId = studentId});
             }
-            var model = await _calendarService.GetCalendar(studentId);
+            var model = await _calendarService.GetCalendar(StudentId);
             if(model.CalendarId != 0)
             {
                 CalendarId = model.CalendarId;

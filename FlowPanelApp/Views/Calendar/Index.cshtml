@@ -8,7 +8,7 @@
     int GetAdjustedDay(DayOfWeek day)
     {
         // Dostosuj numerację dni zgodnie z planem zajęć
-        return ((int)day + 6) % 7 + 1; // Dodaj 6 i wykonaj modulo 7, a następnie dodaj 1
+        return ((int)day + 6) % 7 + 1; 
     }
 }
 <head>
@@ -61,7 +61,7 @@
                             @(lessonForDay != null ? lessonForDay.NameOfSubject : "")
                             @if (lessonForDay != null)
                             {
-                                <div class="delete-button-container">
+                                <div class="edit-button-container">
                                     <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("Edit", "Calendar", new { lessonId= lessonForDay.LessonId })'">
                                         <i class="fa-solid fa fa-pencil"></i>
                                     </button>
@@ -76,10 +76,6 @@
    
 
 </body>
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model.CalendarId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
 
 <style>
     table {
@@ -107,7 +103,7 @@
         border-radius: 50%;
     }
 
-    .delete-button-container {
+    .edit-button-container {
         position: absolute;
         top: 0;
         right: 0;
