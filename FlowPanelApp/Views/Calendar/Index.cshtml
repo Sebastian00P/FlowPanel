@@ -50,14 +50,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var lessonGroup in Model.Lessons.OrderBy(l => l.EndTime).ThenBy(l => l.Day).GroupBy(l => new { l.StartTime, l.EndTime }))
+            @foreach (var lessonGroup in Model.Lessons.OrderBy(l => l.StartTime).ThenBy(l => l.Day).GroupBy(l => new { l.StartTime, l.EndTime }))
             {
                 <tr>
                     <td>@lessonGroup.Key.StartTime.ToString("hh\\:mm") - @lessonGroup.Key.EndTime.ToString("hh\\:mm")</td>
                     @for (int dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
                     {
                         var lessonForDay = lessonGroup.FirstOrDefault(l => GetAdjustedDay(l.Day) == dayOfWeek + 1);
-                        <td>@(lessonForDay != null ? lessonForDay.NameOfSubject : "")</td>
+                        <td class="position-relative">
+                            @(lessonForDay != null ? lessonForDay.NameOfSubject : "")
+                            @if (lessonForDay != null)
+                            {
+                                <div class="delete-button-container">
+                                    <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("Edit", "Calendar", new { lessonId= lessonForDay.LessonId })'">
+                                        <i class="fa-solid fa fa-pencil"></i>
+                                    </button>
+                                </div>
+                            }
+                        </td>
                     }
                 </tr>
             }
@@ -74,7 +84,7 @@
 <style>
     table {
         border-collapse: collapse;
-        width: 100%;
+        width: 100%;       
     }
 
     th, td {
@@ -95,5 +105,12 @@
 
     .comeback-btn {
         border-radius: 50%;
+    }
+
+    .delete-button-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: scale(0.65);
     }
 </style>

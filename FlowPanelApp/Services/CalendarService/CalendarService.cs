@@ -82,5 +82,17 @@ namespace FlowPanelApp.Services.CalendarService
             
             }
         }
+        public async Task UpdateLesson(Lesson lesson)
+        {
+            try
+            {
+                _flowContext.Lessons.Update(lesson);
+                await _flowContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
     }
 }

@@ -57,5 +57,30 @@ namespace FlowPanelApp.Controllers
             await _calendarService.CreateNewLesson(lesson);
             return RedirectToAction("Index","Calendar", new { studentId = StudentId });
         }
+        [Authorize]
+        public async Task<IActionResult> DeleteLesson(long lessonId)
+        {
+            await _calendarService.DeleteLesson(lessonId);
+            return RedirectToAction("Index", "Calendar", new { studentId = StudentId });
+        }
+        [Authorize]
+        public async Task<IActionResult> Edit(long lessonId)
+        {
+            var lesson = await _calendarService.GetLessonById(lessonId);
+            var model = new CreateLessonViewModel()
+            {
+                CalendarId = lesson.CalendarId,
+                Lesson = lesson,
+                Courses = await _calendarService.GetCoursesNames(StudentId)
+            };
+            return View(model);
+        }
+        [Authorize]
+        public async Task<IActionResult> UpdateLesson(Lesson lesson)
+        {
+            lesson.CalendarId = CalendarId;
+            await _calendarService.UpdateLesson(lesson);
+            return RedirectToAction("Index", "Calendar", new { studentId = StudentId });
+        }
     }
 }

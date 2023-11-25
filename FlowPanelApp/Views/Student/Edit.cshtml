@@ -5,8 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edytuj dane studenta</h1>
+<head>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
 
+</head>
+
+<div class="return-section">
+    <div>
+        <h1>Edytuj dane studenta</h1>
+    </div>
+    <div class="float-right" style="padding: 5px">
+        <button class="btn btn-secondary comeback-btn" onclick="location.href='@Url.Action("Index", "Student")'">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -45,12 +58,18 @@
     </div>
 </div>
 
-<div>
-    <div class="float-right" style="padding: 5px">
-        <input type="button" class="btn btn-secondary" value="Wróć do listy" onclick="location.href='@Url.Action("Index", "Student")'" />
-    </div>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<style>
+    .comeback-btn {
+        border-radius: 50%;
+    }
+
+    .return-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>

@@ -13,5 +13,6 @@ namespace FlowPanelApp.Services.CalendarService
         Task<List<string>> GetCoursesNames(long studentId);
         Task<Lesson> GetLessonById(long lessonId);
         Task DeleteLesson(long lessonId);
+        Task UpdateLesson(Lesson lesson);
     }
 }

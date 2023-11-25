@@ -9,9 +9,17 @@
 
 </head>
 
-
+<div class="return-section">
+    <div>
+        <h1>Dane opiekuna</h1>
+    </div>
+    <div class="float-right" style="padding: 5px">
+        <button class="btn btn-secondary comeback-btn" onclick="location.href='@Url.Action("Index", "Classes")'">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+    </div>
+</div>
 <div>
-    <h4>Dane opiekuna</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -59,7 +67,17 @@
     <button class="btn btn-info comeback-btn" onclick="location.href='@Url.Action("EditViewTeacher", "Classes", new { classId=Model.ClassId })'">
         <i class="fa-solid fa fa-pencil"></i>
     </button>
-    <div class="float-right" style="padding: 5px">
-        <input type="button" class="btn btn-secondary" value="Wróć do listy" onclick="location.href='@Url.Action("Index", "Classes")'" />
-    </div>
 </div>
+
+
+<style>
+    .comeback-btn {
+        border-radius: 50%;
+    }
+
+    .return-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
