@@ -1,0 +1,114 @@
+﻿@model FlowPanelApp.Models.StudentCalendar.Calendar
+
+@{
+    ViewData["Title"] = "Plan zajęć";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <div class="return-section">
+        <div>
+            <h1>Plan lekcji</h1>
+        </div>
+        <div class="float-right" style="padding: 5px">
+            <button class="btn btn-secondary comeback-btn" onclick="location.href='@Url.Action("Index", "Student")'">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <p>
+        <a asp-action="Create">
+            <div class="float-left" style="padding-bottom: 5px;">
+                <input type="button" class="btn btn-primary" value="Dodaj nową lekcję" />
+            </div>
+        </a>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Godzina</th>
+                <th>Poniedziałek</th>
+                <th>Wtorek</th>
+                <th>Środa</th>
+                <th>Czwartek</th>
+                <th>Piątek</th>
+                <th>Sobota</th>
+                <th>Niedziela</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lesson in Model.Lessons.OrderBy(l => l.EndTime).ThenBy(l => l.Day))
+            {
+                <tr>
+                    <td>@lesson.StartTime.ToString("hh\\:mm") - @lesson.EndTime.ToString("hh\\:mm")</td>
+                    <td>@if (lesson.Day == DayOfWeek.Monday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Tuesday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Wednesday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Thursday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Friday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Saturday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                    <td>@if (lesson.Day == DayOfWeek.Sunday)
+                        {
+                            @lesson.NameOfSubject
+                        }</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.CalendarId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .return-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .comeback-btn {
+        border-radius: 50%;
+    }
+</style>
